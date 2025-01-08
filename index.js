@@ -12,13 +12,7 @@ const User = require("./models/user");
 const fs = require("fs");
 
 app.use(cors({
-  origin: (origin, callback) => {
-    if (!origin || origin === 'null') {
-      callback(null, true); // Allow requests with no origin
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
+  origin: '*', // Adjust the port if necessary
   methods: ["GET", "POST", "PUT", "DELETE"],
   allowedHeaders: ["Content-Type", "Authorization"],
 }));
