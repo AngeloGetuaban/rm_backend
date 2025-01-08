@@ -12,10 +12,17 @@ const User = require("./models/user");
 const fs = require("fs");
 
 app.use(cors({
-  origin: '*', // Allow all origins
+  origin: (origin, callback) => {
+    if (!origin || origin === 'null') {
+      callback(null, true); // Allow requests with no origin
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   methods: ["GET", "POST", "PUT", "DELETE"],
   allowedHeaders: ["Content-Type", "Authorization"],
 }));
+
 app.use(express.json());
 
 
